@@ -23,10 +23,35 @@ describe('Thermostat', function() {
   });
 
   it('has a minimum of 10 degrees', function() {
-    for (var i = 0; i < 11; i++) {
-      thermostat.down();
+    for (var i = 0; i < 10; i++) {
+      thermostat.TurnDownTemperature();
     }
-    expect(thermostat.getCurrentTemperature()).toEqual(10);
+    expect(thermostat.showTemperature()).toEqual(10);
+  });
+
+  it('has power saving mode on by default', function() {
+    expect(thermostat.isPowerSavingModeOn()).toBe(true);
+  });
+
+  it('can switch PSM off', function() {
+    thermostat.switchPowerSavingModeOff();
+    expect(thermostat.isPowerSavingModeOn()).toBe(false);
+   });
+
+   it('can switch PSM back on', function() {
+     thermostat.switchPowerSavingModeOff();
+     expect(thermostat.isPowerSavingModeOn()).toBe(false)
+     thermostat.switchPowerSavingModeOn();
+     expect(thermostat.isPowerSavingModeOn()).toBe(true);
+   });
+
+   describe('when power saving mode is on', function() {
+     it('has a maximum temperature of 25 degrees', function() {
+        for (var i = 0; i < 5; i++) {
+          thermostat.TurnUpTemperature();
+        }
+        expect(thermostat.showTemperature()).toEqual(25);
+     });
+   });
   });
  });
-});
