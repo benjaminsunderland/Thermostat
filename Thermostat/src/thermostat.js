@@ -21,6 +21,14 @@ Thermostat.prototype.TurnUpTemperature = function() {
 };
 
 
+Thermostat.prototype.isMaximumTemperature = function() {
+  if (this.isPowerSavingModeOn() === false) {
+    return this.temperature === this.MAX_LIMIT_PSM_OFF;
+  }
+  return this.temperature === this.MAX_LIMIT_PSM_ON;
+}
+
+
 Thermostat.prototype.TurnDownTemperature = function() {
   if (this.isMinimumTemperature()) {
     return;
