@@ -53,5 +53,13 @@ describe('Thermostat', function() {
         expect(thermostat.showTemperature()).toEqual(25);
      });
    });
+
+     it('can be reset to the default temperature', function() {
+       for (var i =0; i < 6; i++) {
+         thermostat.TurnUpTemperature();
+       }
+         thermostat.resetTemperature();
+         expect(thermostat.showTemperature()).toEqual(20);
+   });
   });
  });
