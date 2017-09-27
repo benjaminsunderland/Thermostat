@@ -13,13 +13,20 @@ describe('Thermostat', function() {
   });
 
   it('can increase the temperature with a up function', function() {
-    thermostat.TurnUpTemperature(5)
-    expect(thermostat.showTemperature()).toEqual(25);
+    thermostat.TurnUpTemperature()
+    expect(thermostat.showTemperature()).toEqual(21);
   });
 
   it('can descrease the temperature with a down function', function() {
-    thermostat.TurnDownTemperature(5)
-    expect(thermostat.showTemperature()).toEqual(15)
+    thermostat.TurnDownTemperature()
+    expect(thermostat.showTemperature()).toEqual(19)
+  });
+
+  it('has a minimum of 10 degrees', function() {
+    for (var i = 0; i < 11; i++) {
+      thermostat.down();
+    }
+    expect(thermostat.getCurrentTemperature()).toEqual(10);
   });
  });
 });
